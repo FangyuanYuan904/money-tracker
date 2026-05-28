@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Money Tracker</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f6f7fb;
+      color: #222;
+      padding: 20px;
+    }
+
+    .app {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      margin: 0 0 20px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 16px;
+      background: #fafafa;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #6b7cff;
+      background: white;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 15px;
+      cursor: pointer;
+      background: #222;
+      color: white;
+    }
+
+    button.secondary {
+      background: #e9ecf5;
+      color: #222;
+    }
+
+    button.danger {
+      background: #ffeded;
+      color: #c62828;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .summary-box {
+      background: #f7f8ff;
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .summary-box .name {
+      color: #666;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .summary-box .value {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      color: #555;
+      background: #fafafa;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .positive {
+      color: #137333;
+      font-weight: 600;
+    }
+
+    .negative {
+      color: #c62828;
+      font-weight: 600;
+    }
+
+    .empty {
+      text-align: center;
+      color: #777;
+      padding: 30px 0;
+    }
+
+    .tip {
+      font-size: 13px;
+      color: #777;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    .goal-card {
+      background: white;
+      border-radius: 18px;
+      padding: 22px 22px 26px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .goal-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .goal-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0 0 6px;
+    }
+
+    .goal-subtitle {
+      color: #666;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .goal-number {
+      text-align: right;
+      min-width: 180px;
+    }
+
+    .goal-number .percent {
+      font-size: 28px;
+      font-weight: 800;
+      color: #137333;
+    }
+
+    .goal-number .left {
+      font-size: 13px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .progress-area {
+      position: relative;
+      padding-top: 44px;
+      padding-bottom: 44px;
+    }
+
+    .milestone-dates {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 34px;
+    }
+
+    .milestone-date {
+      position: absolute;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: #137333;
+      background: #e9f7ef;
+      border: 1px solid #ccebd7;
+      padding: 4px 6px;
+      border-radius: 999px;
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    .progress-track {
+      position: relative;
+      height: 26px;
+      border-radius: 999px;
+      background: white;
+      border: 2px solid #222;
+      overflow: visible;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: repeating-linear-gradient(135deg, #8bdc65 0px, #8bdc65 12px, #6fca4b 12px, #6fca4b 24px);
+      transition: width 0.5s ease;
+    }
+
+    .money-plane {
+      position: absolute;
+      top: 50%;
+      left: 0%;
+      transform: translate(-50%, -62%);
+      font-size: 30px;
+      transition: left 0.5s ease;
+      filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.18));
+    }
+
+    .milestone-labels {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 30px;
+    }
+
+    .milestone-label {
+      position: absolute;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: #555;
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    .milestone-tick {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      width: 2px;
+      height: 12px;
+      background: #222;
+      transform: translateX(-50%);
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 14px;
+      }
+
+      .grid, .summary {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>Money Tracker</h1>
+    <p class="subtitle">每天输入收入和支出，自动计算当天剩余、累计美元，以及折合人民币。数据会保存在这个浏览器本地。</p>
+
+    <div class="card">
+      <div class="grid">
+        <div>
+          <label for="date">日期</label>
+          <input id="date" type="date" />
+        </div>
+        <div>
+          <label for="income">今日收入 $</label>
+          <input id="income" type="number" min="0" step="0.01" placeholder="例如 168" />
+        </div>
+        <div>
+          <label for="expense">今日支出 $</label>
+          <input id="expense" type="number" min="0" step="0.01" placeholder="例如 35" />
+        </div>
+        <div>
+          <label for="rate">自动查询汇率 USD → CNY</label>
+          <input id="rate" type="number" min="0" step="0.0001" value="6.80" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button onclick="addRecord()">添加 / 更新今天记录</button>
+        <button class="secondary" onclick="exportCSV()">导出 CSV</button>
+        <button class="danger" onclick="clearAll()">清空全部</button>
+      </div>
+
+      <p class="tip">小提醒：选择日期后会自动查询对应日期的美元兑人民币汇率。如果当天没有汇率数据，系统可能会使用最近一个可用交易日的汇率。你也可以手动修改汇率。</p>
+      <p class="tip" id="rateStatus">等待选择日期后自动查询汇率。</p>
+    </div>
+
+    <div class="card">
+      <div class="summary">
+        <div class="summary-box">
+          <div class="name">累计收入</div>
+          <div class="value" id="totalIncome">$0.00</div>
+        </div>
+        <div class="summary-box">
+          <div class="name">累计支出</div>
+          <div class="value" id="totalExpense">$0.00</div>
+        </div>
+        <div class="summary-box">
+          <div class="name">累计剩余</div>
+          <div class="value" id="totalBalance">$0.00</div>
+        </div>
+        <div class="summary-box">
+          <div class="name">约合人民币</div>
+          <div class="value" id="totalCNY">¥0.00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="goal-card">
+      <div class="goal-header">
+        <div>
+          <h2 class="goal-title">10万人民币进度</h2>
+          <p class="goal-subtitle" id="goalSubtitle">已完成 ¥0.00 / ¥100,000.00</p>
+        </div>
+        <div class="goal-number">
+          <div class="percent" id="targetProgress">0.0%</div>
+          <div class="left" id="targetLeft">还差 ¥100000.00</div>
+        </div>
+      </div>
+      <div class="progress-area">
+        <div class="milestone-dates" id="milestoneDates"></div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+          <div class="money-plane" id="moneyPlane">💸</div>
+        </div>
+        <div class="milestone-labels" id="milestoneLabels"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top: 0; font-size: 20px;">每日记录</h2>
+      <div id="tableWrap"></div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "money_tracker_records";
+
+    const dateInput = document.getElementById("date");
+    const incomeInput = document.getElementById("income");
+    const expenseInput = document.getElementById("expense");
+    const rateInput = document.getElementById("rate");
+    const rateStatus = document.getElementById("rateStatus");
+
+    dateInput.valueAsDate = new Date();
+
+    let records = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    function formatUSD(value) {
+      return "$" + Number(value).toFixed(2);
+    }
+
+    function formatCNY(value) {
+      return "¥" + Number(value).toFixed(2);
+    }
+
+    function formatWanLabel(value) {
+      return value === 0 ? "0" : value + "万";
+    }
+
+    function saveRecords() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    }
+
+    async function fetchExchangeRateByDate(date) {
+      if (!date) return;
+
+      rateStatus.textContent = "正在查询这一天的 USD → CNY 汇率……";
+
+      try {
+        const url = `https://api.frankfurter.dev/v1/${date}?base=USD&symbols=CNY`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error("汇率查询失败");
+        }
+
+        const data = await response.json();
+        const rate = data.rates && data.rates.CNY;
+        const actualDate = data.date || date;
+
+        if (!rate) {
+          throw new Error("没有找到 CNY 汇率");
+        }
+
+        rateInput.value = Number(rate).toFixed(4);
+
+        if (actualDate !== date) {
+          rateStatus.textContent = `已使用最近可用日期 ${actualDate} 的汇率：1 USD ≈ ${Number(rate).toFixed(4)} CNY`;
+        } else {
+          rateStatus.textContent = `已查询 ${actualDate} 汇率：1 USD ≈ ${Number(rate).toFixed(4)} CNY`;
+        }
+
+        render();
+      } catch (error) {
+        rateStatus.textContent = "自动查询失败。你可以先手动填写汇率，之后再更新。";
+        console.error(error);
+      }
+    }
+
+    async function addRecord() {
+      const date = dateInput.value;
+      const income = Number(incomeInput.value || 0);
+      const expense = Number(expenseInput.value || 0);
+
+      if (!date) {
+        alert("请先选择日期");
+        return;
+      }
+
+      if (!rateInput.value) {
+        await fetchExchangeRateByDate(date);
+      }
+
+      const rate = Number(rateInput.value || 6.8);
+      const balance = income - expense;
+
+      const newRecord = {
+        date,
+        income,
+        expense,
+        balance,
+        rate
+      };
+
+      const existingIndex = records.findIndex(record => record.date === date);
+
+      if (existingIndex >= 0) {
+        records[existingIndex] = newRecord;
+      } else {
+        records.push(newRecord);
+      }
+
+      records.sort((a, b) => new Date(b.date) - new Date(a.date));
+      saveRecords();
+      render();
+
+      incomeInput.value = "";
+      expenseInput.value = "";
+    }
+
+    function deleteRecord(date) {
+      records = records.filter(record => record.date !== date);
+      saveRecords();
+      render();
+    }
+
+    function clearAll() {
+      if (!confirm("确定要清空全部记账记录吗？")) return;
+      records = [];
+      saveRecords();
+      render();
+    }
+
+    function exportCSV() {
+      if (records.length === 0) {
+        alert("现在还没有记录可以导出");
+        return;
+      }
+
+      const header = ["日期", "收入USD", "支出USD", "当天剩余USD", "当日汇率", "累计剩余USD", "约合人民币CNY"];
+      const rowsOldToNew = [...records].sort((a, b) => new Date(a.date) - new Date(b.date));
+      let runningBalance = 0;
+
+      const rows = rowsOldToNew.map(record => {
+        runningBalance += record.balance;
+        return [
+          record.date,
+          record.income.toFixed(2),
+          record.expense.toFixed(2),
+          record.balance.toFixed(2),
+          Number(record.rate).toFixed(4),
+          runningBalance.toFixed(2),
+          (runningBalance * Number(record.rate)).toFixed(2)
+        ];
+      });
+
+      const lineBreak = String.fromCharCode(10);
+      const bom = String.fromCharCode(0xfeff);
+      const csvContent = [header, ...rows]
+        .map(row => row.join(","))
+        .join(lineBreak);
+
+      const blob = new Blob([bom + csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "money_tracker_records.csv";
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function renderGoalMilestones(currentRate) {
+      const targetCNY = 100000;
+      const milestoneLabels = document.getElementById("milestoneLabels");
+      const milestoneDates = document.getElementById("milestoneDates");
+
+      const recordsOldToNew = [...records].sort((a, b) => new Date(a.date) - new Date(b.date));
+      let runningBalance = 0;
+      const reachedDates = {};
+
+      recordsOldToNew.forEach(record => {
+        runningBalance += record.balance;
+        const runningCNY = runningBalance * currentRate;
+
+        for (let milestone = 10000; milestone <= targetCNY; milestone += 10000) {
+          if (runningCNY >= milestone && !reachedDates[milestone]) {
+            reachedDates[milestone] = record.date.slice(5).replace("-", "/");
+          }
+        }
+      });
+
+      let labelsHTML = "";
+      let datesHTML = "";
+
+      for (let i = 0; i <= 10; i++) {
+        const percent = i * 10;
+        const milestoneValue = i * 10000;
+        labelsHTML += `
+          <div class="milestone-label" style="left: ${percent}%">
+            <div class="milestone-tick"></div>
+            ${formatWanLabel(i)}
+          </div>
+        `;
+
+        if (i > 0 && reachedDates[milestoneValue]) {
+          datesHTML += `
+            <div class="milestone-date" style="left: ${percent}%">
+              ${reachedDates[milestoneValue]}
+            </div>
+          `;
+        }
+      }
+
+      milestoneLabels.innerHTML = labelsHTML;
+      milestoneDates.innerHTML = datesHTML;
+    }
+
+    function render() {
+      const totalIncome = records.reduce((sum, record) => sum + record.income, 0);
+      const totalExpense = records.reduce((sum, record) => sum + record.expense, 0);
+      const totalBalance = records.reduce((sum, record) => sum + record.balance, 0);
+      const currentRate = Number(rateInput.value || 6.8);
+      const totalCNY = totalBalance * currentRate;
+      const targetCNY = 100000;
+      const targetProgress = Math.min((totalCNY / targetCNY) * 100, 100);
+      const targetLeft = Math.max(targetCNY - totalCNY, 0);
+
+      document.getElementById("targetProgress").textContent = targetProgress.toFixed(1) + "%";
+      document.getElementById("targetLeft").textContent = "还差 " + formatCNY(targetLeft);
+      document.getElementById("goalSubtitle").textContent = "已完成 " + formatCNY(totalCNY) + " / ¥100,000.00";
+      document.getElementById("progressFill").style.width = targetProgress + "%";
+      document.getElementById("moneyPlane").style.left = targetProgress + "%";
+      renderGoalMilestones(currentRate);
+      document.getElementById("totalIncome").textContent = formatUSD(totalIncome);
+      document.getElementById("totalExpense").textContent = formatUSD(totalExpense);
+      document.getElementById("totalBalance").textContent = formatUSD(totalBalance);
+      document.getElementById("totalCNY").textContent = formatCNY(totalCNY);
+
+      const tableWrap = document.getElementById("tableWrap");
+
+      if (records.length === 0) {
+        tableWrap.innerHTML = '<div class="empty">还没有记录。落地之后第一天就可以开始记啦。</div>';
+        return;
+      }
+
+      const recordsOldToNew = [...records].sort((a, b) => new Date(a.date) - new Date(b.date));
+      let runningBalance = 0;
+
+      const recordsWithTotal = recordsOldToNew.map(record => {
+        runningBalance += record.balance;
+        return {
+          ...record,
+          runningBalance
+        };
+      }).sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      tableWrap.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>日期</th>
+              <th>收入 $</th>
+              <th>支出 $</th>
+              <th>当天剩余 $</th>
+              <th>当日汇率</th>
+              <th>累计剩余 $</th>
+              <th>约合人民币</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${recordsWithTotal.map(record => `
+              <tr>
+                <td>${record.date}</td>
+                <td>${formatUSD(record.income)}</td>
+                <td>${formatUSD(record.expense)}</td>
+                <td class="${record.balance >= 0 ? "positive" : "negative"}">${formatUSD(record.balance)}</td>
+                <td>${Number(record.rate).toFixed(4)}</td>
+                <td class="${record.runningBalance >= 0 ? "positive" : "negative"}">${formatUSD(record.runningBalance)}</td>
+                <td>${formatCNY(record.runningBalance * Number(record.rate))}</td>
+                <td><button class="danger" onclick="deleteRecord('${record.date}')">删除</button></td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
+    }
+
+    dateInput.addEventListener("change", () => fetchExchangeRateByDate(dateInput.value));
+    rateInput.addEventListener("input", render);
+
+    fetchExchangeRateByDate(dateInput.value);
+    render();
+  </script>
+</body>
+</html>
