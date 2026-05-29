@@ -9,264 +9,281 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --green: #16a34a;
+      --green-dark: #15803d;
+      --green-light: #ecfdf5;
+      --green-border: #bbf7d0;
+      --text: #111827;
+      --muted: #5b6472;
+      --border: #e6e8ec;
+      --bg: #f7faf8;
+      --card: rgba(255, 255, 255, 0.96);
+      --shadow: 0 8px 22px rgba(15, 23, 42, 0.045);
+    }
+
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f6f7fb;
-      color: #222;
-      padding: 20px;
+      background: var(--bg);
+      color: var(--text);
+      padding: 28px;
     }
 
     .app {
-      max-width: 1000px;
+      max-width: 1160px;
       margin: 0 auto;
     }
 
     h1 {
-      margin: 0 0 8px;
-      font-size: 28px;
+      margin: 0 0 10px;
+      font-size: 42px;
+      line-height: 1.1;
+      font-weight: 760;
+      letter-spacing: -0.04em;
     }
 
     .subtitle {
-      margin: 0 0 20px;
-      color: #666;
-      line-height: 1.5;
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 760px;
+      font-weight: 450;
     }
 
-    .card {
-      background: white;
+    .card,
+    .goal-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .goal-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f7fff9 100%);
+      border: 1px solid #ccefd7;
       border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      padding: 24px 28px 30px;
+      box-shadow: 0 10px 26px rgba(22, 163, 74, 0.08);
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 24px;
+      font-size: 21px;
+      font-weight: 720;
+    }
+
+    .section-icon {
+      color: var(--green);
+      font-size: 21px;
     }
 
     label {
       display: block;
       font-size: 14px;
-      margin-bottom: 6px;
-      color: #555;
+      font-weight: 680;
+      color: #374151;
+      margin-bottom: 8px;
     }
 
-    input {
+    input,
+    select {
       width: 100%;
       max-width: 100%;
       min-width: 0;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
+      height: 52px;
+      padding: 13px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background: white;
+      color: var(--text);
       font-size: 16px;
-      background: #fafafa;
       display: block;
     }
 
-    input:focus {
+    input:focus,
+    select:focus {
       outline: none;
-      border-color: #6b7cff;
-      background: white;
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
     }
 
     button {
       border: none;
-      border-radius: 12px;
-      padding: 12px 16px;
+      border-radius: 8px;
+      padding: 13px 20px;
       font-size: 15px;
+      font-weight: 760;
       cursor: pointer;
-      background: #222;
+      white-space: nowrap;
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .btn-dark {
+      background: #111827;
       color: white;
+      box-shadow: 0 5px 14px rgba(17, 24, 39, 0.14);
     }
 
-    button.secondary {
-      background: #e9ecf5;
-      color: #222;
+    .btn-green {
+      background: var(--green);
+      color: white;
+      box-shadow: 0 5px 14px rgba(22, 163, 74, 0.18);
     }
 
-    button.danger {
-      background: #ffeded;
-      color: #c62828;
+    .btn-light {
+      background: #f3f6f8;
+      color: #111827;
+      border: 1px solid #dde5ed;
     }
 
-    .actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 14px;
+    .btn-danger {
+      background: #fff5f5;
+      color: #dc2626;
+      border: 1px solid #fee2e2;
+      box-shadow: none;
     }
 
-    .summary {
+    .goal-setting-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      grid-template-columns: 1fr 1fr 1fr 1.25fr auto;
+      gap: 18px;
+      align-items: end;
     }
 
-    .summary-box {
-      background: #f7f8ff;
-      border-radius: 14px;
-      padding: 14px;
+    .goal-combo {
+      display: contents;
     }
 
-    .summary-box .name {
-      color: #666;
-      font-size: 13px;
-      margin-bottom: 8px;
-    }
-
-    .summary-box .value {
-      font-size: 22px;
-      font-weight: 700;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      overflow: hidden;
-      border-radius: 14px;
-    }
-
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid #eee;
-      text-align: left;
+    .helper-box {
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+      color: #166534;
+      padding: 16px;
       font-size: 14px;
-    }
-
-    th {
-      color: #555;
-      background: #fafafa;
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    .positive {
-      color: #137333;
-      font-weight: 600;
-    }
-
-    .negative {
-      color: #c62828;
-      font-weight: 600;
-    }
-
-    .empty {
-      text-align: center;
-      color: #777;
-      padding: 30px 0;
-    }
-
-    .tip {
-      font-size: 13px;
-      color: #777;
       line-height: 1.6;
-      margin-top: 10px;
+      font-weight: 680;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
     }
 
-    .goal-card {
-      background: white;
-      border-radius: 18px;
-      padding: 22px 22px 26px;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    .custom-currency-wrap {
+      display: none;
+      margin-top: 14px;
+      max-width: 260px;
     }
 
-    .goal-header {
+    .goal-top {
       display: flex;
       justify-content: space-between;
-      gap: 16px;
       align-items: flex-start;
+      gap: 18px;
       margin-bottom: 18px;
-      flex-wrap: wrap;
     }
 
-    .goal-title {
-      font-size: 22px;
-      font-weight: 800;
-      margin: 0 0 6px;
-    }
-
-    .goal-subtitle {
-      color: #666;
+    .refresh-rate {
+      border: none;
+      background: transparent;
+      color: var(--green);
+      padding: 0;
       font-size: 14px;
-      margin: 0;
+      font-weight: 760;
+      box-shadow: none;
     }
 
-    .goal-number {
-      text-align: right;
-      min-width: 180px;
+    .goal-main-number {
+      text-align: center;
+      margin: 8px 0 20px;
     }
 
-    .goal-number .percent {
-      font-size: 28px;
-      font-weight: 800;
-      color: #137333;
+    .goal-main-number .amount {
+      font-size: 34px;
+      font-weight: 820;
+      letter-spacing: -0.03em;
     }
 
-    .goal-number .left {
-      font-size: 13px;
-      color: #666;
-      margin-top: 4px;
+    .goal-main-number .percent {
+      margin-top: 8px;
+      font-size: 18px;
+      color: var(--green);
+      font-weight: 780;
+    }
+
+    .goal-main-number .left {
+      margin-top: 8px;
+      color: #374151;
+      font-size: 15px;
+      font-weight: 560;
+    }
+
+    .complete-message {
+      margin-top: 12px;
+      color: var(--green-dark);
+      font-size: 16px;
+      font-weight: 780;
+      display: none;
     }
 
     .progress-area {
       position: relative;
-      padding-top: 44px;
-      padding-bottom: 44px;
-    }
-
-    .milestone-dates {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 34px;
-    }
-
-    .milestone-date {
-      position: absolute;
-      transform: translateX(-50%);
-      font-size: 11px;
-      color: #137333;
-      background: #e9f7ef;
-      border: 1px solid #ccebd7;
-      padding: 4px 6px;
-      border-radius: 999px;
-      white-space: nowrap;
-      font-weight: 700;
+      padding-top: 18px;
+      padding-bottom: 54px;
+      margin-top: 8px;
     }
 
     .progress-track {
       position: relative;
       height: 26px;
+      background: #edf1f3;
       border-radius: 999px;
-      background: white;
-      border: 2px solid #222;
       overflow: visible;
-      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08);
     }
 
     .progress-fill {
+      position: relative;
       height: 100%;
       width: 0%;
+      background: linear-gradient(90deg, #22c55e, var(--green));
+      border-radius: 999px 0 0 999px;
+      transition: width 0.45s ease;
+    }
+
+    .progress-percent-badge {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--green);
+      color: white;
+      font-size: 13px;
+      font-weight: 760;
       border-radius: 999px;
-      background: repeating-linear-gradient(135deg, #8bdc65 0px, #8bdc65 12px, #6fca4b 12px, #6fca4b 24px);
-      transition: width 0.5s ease;
+      padding: 5px 10px;
+      min-width: 48px;
+      text-align: center;
+      z-index: 5;
     }
 
     .money-plane {
       position: absolute;
       top: 50%;
       left: 0%;
-      transform: translate(-50%, -62%);
-      font-size: 30px;
-      transition: left 0.5s ease;
-      filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.18));
+      transform: translate(-50%, -55%);
+      font-size: 31px;
+      transition: left 0.45s ease;
+      filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.16));
+      z-index: 6;
     }
 
     .milestone-labels {
@@ -274,58 +291,310 @@
       left: 0;
       right: 0;
       bottom: 0;
-      height: 30px;
+      height: 42px;
     }
 
     .milestone-label {
       position: absolute;
       transform: translateX(-50%);
       font-size: 12px;
-      color: #555;
+      color: #374151;
+      font-weight: 720;
       white-space: nowrap;
-      font-weight: 700;
+      padding-top: 18px;
     }
 
-    .milestone-tick {
+    .milestone-label::before {
+      content: "";
       position: absolute;
-      top: -20px;
+      top: -8px;
       left: 50%;
       width: 2px;
-      height: 12px;
-      background: #222;
+      height: 13px;
+      background: #374151;
       transform: translateX(-50%);
     }
 
-    @media (max-width: 760px) {
+    .milestone-date {
+      display: block;
+      margin-top: 4px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 780;
+    }
+
+    .goal-target-line {
+      text-align: center;
+      margin-top: 12px;
+      color: #374151;
+      font-weight: 620;
+      font-size: 15px;
+    }
+
+    .record-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1.05fr;
+      gap: 18px;
+      align-items: end;
+    }
+
+    .record-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .tip {
+      margin: 18px 0 0;
+      color: #6b7280;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .summary-and-table {
+      padding: 22px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-bottom: 26px;
+    }
+
+    .summary-box {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 22px;
+      text-align: center;
+      border: 1px solid #edf0f3;
+    }
+
+    .summary-box .name {
+      color: #4b5563;
+      font-size: 14px;
+      font-weight: 680;
+      margin-bottom: 10px;
+    }
+
+    .summary-box .value {
+      font-size: 24px;
+      font-weight: 780;
+    }
+
+    .green-text {
+      color: var(--green);
+    }
+
+    .red-text {
+      color: #ef4444;
+    }
+
+    .blue-text {
+      color: #2563eb;
+    }
+
+    .purple-text {
+      color: #7c3aed;
+    }
+
+    .table-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .table-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      font-size: 20px;
+      font-weight: 760;
+      padding: 18px 20px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: center;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    th {
+      background: #f8fafc;
+      color: #374151;
+      font-weight: 760;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .positive {
+      color: var(--green);
+      font-weight: 760;
+    }
+
+    .negative {
+      color: #ef4444;
+      font-weight: 760;
+    }
+
+    .empty {
+      padding: 42px 20px;
+      color: #6b7280;
+      text-align: center;
+      line-height: 1.8;
+      font-weight: 560;
+    }
+
+    .empty-icon {
+      font-size: 30px;
+      color: #9ca3af;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .celebration-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      display: none;
+      overflow: hidden;
+    }
+
+    .celebration-main {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0.2);
+      font-size: 84px;
+      opacity: 0;
+      animation: popAndBurst 900ms ease-out forwards;
+    }
+
+    .celebration-piece {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      font-size: 30px;
+      opacity: 0;
+      animation: flyPiece 1000ms ease-out forwards;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes popAndBurst {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2) rotate(-18deg);
+      }
+
+      35% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.45) rotate(8deg);
+      }
+
+      62% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.08) rotate(0deg);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.7) rotate(16deg);
+      }
+    }
+
+    @keyframes flyPiece {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1.25) rotate(var(--r));
+      }
+    }
+
+    @media (max-width: 900px) {
       body {
-        padding: 14px;
+        padding: 18px;
       }
 
       h1 {
-        font-size: 34px;
+        font-size: 40px;
       }
 
-      .card, .goal-card {
-        padding: 16px;
-        border-radius: 16px;
+      .goal-setting-grid,
+      .record-grid,
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .helper-box {
+        min-height: auto;
+      }
+
+      .goal-top {
+        display: block;
+      }
+
+      .refresh-rate {
+        margin-top: 8px;
+      }
+
+      .goal-main-number .amount {
+        font-size: 28px;
       }
 
       input[type="date"] {
         font-size: 20px;
-        padding-left: 10px;
-        padding-right: 10px;
         -webkit-appearance: none;
         appearance: none;
       }
 
-      .grid, .summary {
-        grid-template-columns: 1fr;
+      .card,
+      .goal-card {
+        padding: 20px;
       }
 
-      table {
-        display: block;
+      .summary-and-table {
+        padding: 18px;
+      }
+
+      .summary-box {
+        text-align: left;
+      }
+
+      .table-card {
         overflow-x: auto;
-        white-space: nowrap;
+      }
+
+      .milestone-label {
+        font-size: 10px;
+      }
+
+      .milestone-date {
+        font-size: 10px;
+      }
+
+      .celebration-main {
+        font-size: 72px;
       }
     }
   </style>
@@ -333,122 +602,469 @@
 <body>
   <div class="app">
     <h1>Money Tracker</h1>
-    <p class="subtitle">每天输入收入和支出，自动计算当天剩余、累计美元，以及折合人民币。数据会保存在这个浏览器本地。</p>
+    <p class="subtitle">
+      每天输入收入和支出，自动计算当天剩余、累计剩余，并按你设置的目标币种换算进度。<br />
+      数据会保存在这个浏览器本地。
+    </p>
 
-    <div class="card">
-      <div class="grid">
-        <div>
-          <label for="date">日期</label>
-          <input id="date" type="date" />
+    <section class="card">
+      <h2 class="section-title"><span class="section-icon">🎯</span>目标设置</h2>
+
+      <div class="goal-setting-grid">
+        <div class="goal-combo">
+          <div>
+            <label for="goalAmount">目标金额</label>
+            <input id="goalAmount" type="number" min="0" step="0.01" value="0" placeholder="例如 100000" />
+          </div>
+          <div>
+            <label for="goalCurrency">币种</label>
+            <select id="goalCurrency"></select>
+          </div>
         </div>
+
         <div>
-          <label for="income">今日收入 $</label>
-          <input id="income" type="number" min="0" step="0.01" placeholder="例如 168" />
+          <label for="baseCurrency">记账 / 收入币种</label>
+          <select id="baseCurrency"></select>
         </div>
-        <div>
-          <label for="expense">今日支出 $</label>
-          <input id="expense" type="number" min="0" step="0.01" placeholder="例如 35" />
+
+        <div class="helper-box">
+          设置目标金额、目标币种和记账币种，<br />
+          进度条会根据你的目标自动计算。
         </div>
+
         <div>
-          <label for="rate">自动查询汇率 USD → CNY</label>
-          <input id="rate" type="number" min="0" step="0.0001" value="6.80" />
+          <button class="btn-green" onclick="saveGoalSettings()">💾 保存目标</button>
         </div>
       </div>
 
-      <div class="actions">
-        <button onclick="addRecord()">添加 / 更新今天记录</button>
-        <button class="secondary" onclick="exportCSV()">导出 CSV</button>
-        <button class="danger" onclick="clearAll()">清空全部</button>
+      <div class="custom-currency-wrap" id="customCurrencyWrap">
+        <label for="customCurrency">自定义目标币种代码</label>
+        <input id="customCurrency" type="text" maxlength="3" placeholder="例如 CHF" />
       </div>
 
-      <p class="tip">小提醒：选择日期后会自动查询对应日期的美元兑人民币汇率。如果当天没有汇率数据，系统可能会使用最近一个可用交易日的汇率。你也可以手动修改汇率。</p>
-      <p class="tip" id="rateStatus">等待选择日期后自动查询汇率。</p>
-    </div>
-
-    <div class="card">
-      <div class="summary">
-        <div class="summary-box">
-          <div class="name">累计收入</div>
-          <div class="value" id="totalIncome">$0.00</div>
-        </div>
-        <div class="summary-box">
-          <div class="name">累计支出</div>
-          <div class="value" id="totalExpense">$0.00</div>
-        </div>
-        <div class="summary-box">
-          <div class="name">累计剩余</div>
-          <div class="value" id="totalBalance">$0.00</div>
-        </div>
-        <div class="summary-box">
-          <div class="name">约合人民币</div>
-          <div class="value" id="totalCNY">¥0.00</div>
-        </div>
+      <div style="margin-top: 14px;">
+        <button class="btn-light" onclick="resetGoalSettings()">重置目标</button>
       </div>
-    </div>
 
-    <div class="goal-card">
-      <div class="goal-header">
-        <div>
-          <h2 class="goal-title">10万人民币进度</h2>
-          <p class="goal-subtitle" id="goalSubtitle">已完成 ¥0.00 / ¥100,000.00</p>
-        </div>
-        <div class="goal-number">
-          <div class="percent" id="targetProgress">0.0%</div>
-          <div class="left" id="targetLeft">还差 ¥100000.00</div>
-        </div>
+      <p class="tip" id="currencyStatus">正在加载币种列表……</p>
+    </section>
+
+    <section class="goal-card">
+      <div class="goal-top">
+        <h2 class="section-title" style="margin-bottom: 0;">
+          <span class="section-icon">💰</span><span id="goalTitle">目标进度</span>
+        </h2>
+        <button class="refresh-rate" onclick="fetchExchangeRateByDate(dateInput.value)">↻ 刷新汇率</button>
       </div>
+
+      <div class="goal-main-number">
+        <div class="amount" id="goalSubtitle">请先设置目标</div>
+        <div class="percent" id="targetProgress">完成 0.0%</div>
+        <div class="left" id="targetLeft">设置目标后自动计算还差多少</div>
+        <div class="complete-message" id="completeMessage">🎉 恭喜完成目标！</div>
+      </div>
+
       <div class="progress-area">
-        <div class="milestone-dates" id="milestoneDates"></div>
         <div class="progress-track">
           <div class="progress-fill" id="progressFill"></div>
+          <div class="progress-percent-badge" id="progressBadge">0.0%</div>
           <div class="money-plane" id="moneyPlane">💸</div>
         </div>
         <div class="milestone-labels" id="milestoneLabels"></div>
       </div>
-    </div>
 
-    <div class="card">
-      <h2 style="margin-top: 0; font-size: 20px;">每日记录</h2>
-      <div id="tableWrap"></div>
-    </div>
+      <div class="goal-target-line" id="goalTargetLine">目标：未设置</div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title"><span class="section-icon">🧾</span>今天记录</h2>
+
+      <div class="record-grid">
+        <div>
+          <label for="date">日期</label>
+          <input id="date" type="date" />
+        </div>
+
+        <div>
+          <label for="income">今日收入 (<span id="baseCodeIncome">未选择</span>)</label>
+          <input id="income" type="number" min="0" step="0.01" placeholder="例如 168" />
+        </div>
+
+        <div>
+          <label for="expense">今日支出</label>
+          <input id="expense" type="number" min="0" step="0.01" placeholder="例如 35" />
+        </div>
+
+        <div>
+          <label for="expenseCurrency">支出币种</label>
+          <select id="expenseCurrency"></select>
+        </div>
+
+        <div>
+          <label for="rate">目标汇率 <span id="rateBaseCode">未选择</span> → <span id="rateTargetCode">未选择</span></label>
+          <input id="rate" type="number" min="0" step="0.0001" placeholder="自动查询" />
+        </div>
+
+        <div class="record-actions">
+          <button class="btn-dark" onclick="addRecord()">添加 / 更新今天记录</button>
+          <button class="btn-light" onclick="exportCSV()">导出 CSV</button>
+        </div>
+      </div>
+
+      <button class="btn-danger" style="margin-top: 16px;" onclick="clearAll()">清空全部记录</button>
+
+      <p class="tip">
+        💡 小提醒：选择记账币种和目标币种后，汇率会自动查询对应日期的“记账币种 → 目标币种”汇率。
+        如果当天没有汇率数据，系统可能会使用最近一个可用交易日的汇率。<br />
+        你也可以手动修改汇率。
+      </p>
+      <p class="tip" id="rateStatus">请选择记账 / 收入币种和目标币种后，系统会自动查询汇率。</p>
+      <p class="tip" id="expenseRateStatus">支出币种选择后，系统会在添加记录时自动换算为记账币种。</p>
+    </section>
+
+    <section class="card summary-and-table">
+      <div class="summary">
+        <div class="summary-box">
+          <div class="name">累计收入 (<span id="baseCodeTotalIncome">未选择</span>)</div>
+          <div class="value green-text" id="totalIncome">0.00</div>
+        </div>
+
+        <div class="summary-box">
+          <div class="name">累计支出 (<span id="baseCodeTotalExpense">未选择</span>)</div>
+          <div class="value red-text" id="totalExpense">0.00</div>
+        </div>
+
+        <div class="summary-box">
+          <div class="name">累计剩余 (<span id="baseCodeTotalBalance">未选择</span>)</div>
+          <div class="value blue-text" id="totalBalance">0.00</div>
+        </div>
+
+        <div class="summary-box">
+          <div class="name" id="convertedLabel">累计剩余约合目标币种</div>
+          <div class="value purple-text" id="totalConverted">0.00</div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-title">📋 每日记录</div>
+        <div id="tableWrap"></div>
+      </div>
+    </section>
   </div>
 
+  <div class="celebration-layer" id="celebrationLayer"></div>
+
   <script>
-    const STORAGE_KEY = "money_tracker_records";
+    const RECORDS_KEY = "money_tracker_records_v5";
+    const GOAL_KEY = "money_tracker_goal_v5";
+
+    const fallbackCurrencies = {
+      CNY: "Chinese Yuan Renminbi",
+      USD: "US Dollar",
+      EUR: "Euro",
+      GBP: "British Pound",
+      JPY: "Japanese Yen",
+      CAD: "Canadian Dollar",
+      AUD: "Australian Dollar",
+      SGD: "Singapore Dollar",
+      HKD: "Hong Kong Dollar",
+      TWD: "New Taiwan Dollar",
+      KRW: "South Korean Won",
+      THB: "Thai Baht",
+      MYR: "Malaysian Ringgit",
+      CHF: "Swiss Franc",
+      NZD: "New Zealand Dollar",
+      AED: "UAE Dirham",
+      MXN: "Mexican Peso",
+      PHP: "Philippine Peso",
+      VND: "Vietnamese Dong",
+      INR: "Indian Rupee",
+      IDR: "Indonesian Rupiah",
+      SEK: "Swedish Krona",
+      NOK: "Norwegian Krone",
+      DKK: "Danish Krone",
+      PLN: "Polish Zloty"
+    };
+
+    const currencySymbols = {
+      USD: "$",
+      CNY: "¥",
+      JPY: "¥",
+      EUR: "€",
+      GBP: "£",
+      KRW: "₩",
+      INR: "₹",
+      RUB: "₽",
+      THB: "฿",
+      VND: "₫",
+      PHP: "₱",
+      TRY: "₺",
+      ILS: "₪",
+      CAD: "C$",
+      AUD: "A$",
+      NZD: "NZ$",
+      HKD: "HK$",
+      SGD: "S$",
+      TWD: "NT$",
+      CHF: "CHF ",
+      AED: "AED ",
+      MXN: "MX$",
+      MYR: "RM ",
+      IDR: "Rp "
+    };
 
     const dateInput = document.getElementById("date");
     const incomeInput = document.getElementById("income");
     const expenseInput = document.getElementById("expense");
+    const expenseCurrencySelect = document.getElementById("expenseCurrency");
     const rateInput = document.getElementById("rate");
     const rateStatus = document.getElementById("rateStatus");
+    const expenseRateStatus = document.getElementById("expenseRateStatus");
+    const goalAmountInput = document.getElementById("goalAmount");
+    const baseCurrencySelect = document.getElementById("baseCurrency");
+    const goalCurrencySelect = document.getElementById("goalCurrency");
+    const customCurrencyWrap = document.getElementById("customCurrencyWrap");
+    const customCurrencyInput = document.getElementById("customCurrency");
+    const currencyStatus = document.getElementById("currencyStatus");
+    const celebrationLayer = document.getElementById("celebrationLayer");
 
     dateInput.valueAsDate = new Date();
 
-    let records = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    let records = JSON.parse(localStorage.getItem(RECORDS_KEY)) || [];
+    let goalSettings = JSON.parse(localStorage.getItem(GOAL_KEY)) || {
+      amount: 0,
+      baseCurrency: "",
+      currency: "",
+      celebrated: false
+    };
+    let currencies = fallbackCurrencies;
 
-    function formatUSD(value) {
-      return "$" + Number(value).toFixed(2);
+    function getBaseCurrency() {
+      return baseCurrencySelect.value || goalSettings.baseCurrency || "";
     }
 
-    function formatCNY(value) {
-      return "¥" + Number(value).toFixed(2);
+    function getExpenseCurrency() {
+      return expenseCurrencySelect.value || getBaseCurrency() || "";
     }
 
-    function formatWanLabel(value) {
-      return value === 0 ? "0" : value + "万";
+    function getTargetCurrency() {
+      const selected = goalCurrencySelect.value;
+
+      if (selected === "CUSTOM") {
+        return (customCurrencyInput.value || goalSettings.currency || "").trim().toUpperCase();
+      }
+
+      return selected || goalSettings.currency || "";
+    }
+
+    function getCurrencySymbol(code) {
+      return currencySymbols[code] || code + " ";
+    }
+
+    function formatMoney(value, code) {
+      const number = Number(value || 0).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+
+      if (!code) return number;
+
+      return getCurrencySymbol(code) + number;
     }
 
     function saveRecords() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+      localStorage.setItem(RECORDS_KEY, JSON.stringify(records));
+    }
+
+    function saveGoal() {
+      localStorage.setItem(GOAL_KEY, JSON.stringify(goalSettings));
+    }
+
+    function updateCurrencyLabels() {
+      const baseCurrency = getBaseCurrency();
+      const targetCurrency = getTargetCurrency();
+      const baseLabel = baseCurrency || "未选择";
+      const targetLabel = targetCurrency || "未选择";
+
+      document.getElementById("baseCodeIncome").textContent = baseLabel;
+       document.getElementById("baseCodeTotalIncome").textContent = baseLabel;
+      document.getElementById("baseCodeTotalExpense").textContent = baseLabel;
+      document.getElementById("baseCodeTotalBalance").textContent = baseLabel;
+      document.getElementById("rateBaseCode").textContent = baseLabel;
+      document.getElementById("rateTargetCode").textContent = targetLabel;
+    }
+
+    function formatBase(value) {
+      return formatMoney(value, getBaseCurrency());
+    }
+
+    function saveGoalSettings() {
+      const amount = Number(goalAmountInput.value || 0);
+      const baseCurrency = getBaseCurrency();
+      const currency = getTargetCurrency();
+
+      if (amount < 0) {
+        alert("目标金额不能小于 0");
+        return;
+      }
+
+      if (!currency || currency.length !== 3) {
+        alert("请选择目标币种，或填写三位币种代码，例如 CNY、USD、EUR");
+        return;
+      }
+
+      if (!baseCurrency || baseCurrency.length !== 3) {
+        alert("请选择记账 / 收入币种");
+        return;
+      }
+
+      const oldAmount = goalSettings.amount;
+      const oldBase = goalSettings.baseCurrency;
+      const oldCurrency = goalSettings.currency;
+
+      goalSettings = {
+        amount,
+        baseCurrency,
+        currency,
+        celebrated: oldAmount === amount && oldBase === baseCurrency && oldCurrency === currency ? !!goalSettings.celebrated : false
+      };
+
+      saveGoal();
+      updateCurrencyLabels();
+      fetchExchangeRateByDate(dateInput.value);
+      render();
+    }
+
+    function resetGoalSettings() {
+      if (!confirm("确定要重置目标吗？这不会清空每日记录。")) return;
+
+      goalSettings = {
+        amount: 0,
+        baseCurrency: "",
+        currency: "",
+        celebrated: false
+      };
+
+      saveGoal();
+
+      goalAmountInput.value = 0;
+      baseCurrencySelect.value = "";
+      goalCurrencySelect.value = "";
+      customCurrencyInput.value = "";
+      customCurrencyWrap.style.display = "none";
+      rateInput.value = "";
+      rateStatus.textContent = "请选择记账 / 收入币种和目标币种后，系统会自动查询汇率。";
+
+      updateCurrencyLabels();
+      render();
+    }
+
+    async function loadCurrencies() {
+      try {
+        const response = await fetch("https://api.frankfurter.dev/v1/currencies");
+
+        if (!response.ok) {
+          throw new Error("无法加载币种列表");
+        }
+
+        currencies = await response.json();
+        currencyStatus.textContent = "币种列表已自动加载。找不到的币种可以选择“其他币种”手动输入三位代码。";
+      } catch (error) {
+        currencies = fallbackCurrencies;
+        currencyStatus.textContent = "币种列表自动加载失败，已使用常用币种列表。你也可以选择“其他币种”手动输入三位代码。";
+      }
+
+      renderCurrencyOptions();
+    }
+
+    function renderCurrencyOptions() {
+      const preferred = ["CNY", "USD", "EUR", "GBP", "JPY", "CAD", "AUD", "SGD", "HKD", "TWD", "KRW", "THB", "MYR"];
+      const allCodes = Object.keys(currencies).sort();
+      const orderedCodes = [
+        ...preferred.filter(code => allCodes.includes(code)),
+        ...allCodes.filter(code => !preferred.includes(code))
+      ];
+
+      const optionsHTML = orderedCodes.map(code => {
+        const name = currencies[code] || code;
+        const label = code === "CNY" ? "人民币 (CNY)" : `${code} - ${name}`;
+        return `<option value="${code}">${label}</option>`;
+      }).join("");
+
+      baseCurrencySelect.innerHTML = '<option value="">请选择</option>' + optionsHTML;
+      expenseCurrencySelect.innerHTML = '<option value="">跟随记账币种</option>' + optionsHTML;
+      goalCurrencySelect.innerHTML = '<option value="">请选择</option>' + optionsHTML + '<option value="CUSTOM">其他币种 / 手动输入</option>';
+
+      baseCurrencySelect.value = goalSettings.baseCurrency || "";
+      expenseCurrencySelect.value = goalSettings.baseCurrency || "";
+
+      if (!goalSettings.currency) {
+        goalCurrencySelect.value = "";
+        customCurrencyWrap.style.display = "none";
+      } else if (orderedCodes.includes(goalSettings.currency)) {
+        goalCurrencySelect.value = goalSettings.currency;
+        customCurrencyWrap.style.display = "none";
+      } else {
+        goalCurrencySelect.value = "CUSTOM";
+        customCurrencyWrap.style.display = "block";
+        customCurrencyInput.value = goalSettings.currency;
+      }
+
+      goalAmountInput.value = goalSettings.amount;
+      updateCurrencyLabels();
+      render();
+      fetchExchangeRateByDate(dateInput.value);
+    }
+
+
+    async function fetchRate(date, fromCurrency, toCurrency) {
+      if (!date || !fromCurrency || !toCurrency) return 1;
+
+      if (fromCurrency === toCurrency) return 1;
+
+      const url = `https://api.frankfurter.dev/v1/${date}?base=${fromCurrency}&symbols=${toCurrency}`;
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error("汇率查询失败");
+      }
+
+      const data = await response.json();
+      const rate = data.rates && data.rates[toCurrency];
+
+      if (!rate) {
+        throw new Error("没有找到该币种汇率");
+      }
+
+      return Number(rate);
     }
 
     async function fetchExchangeRateByDate(date) {
       if (!date) return;
 
-      rateStatus.textContent = "正在查询这一天的 USD → CNY 汇率……";
+      const baseCurrency = getBaseCurrency();
+      const targetCurrency = getTargetCurrency();
+
+      updateCurrencyLabels();
+
+      if (!baseCurrency || !targetCurrency) {
+        rateInput.value = "";
+        rateStatus.textContent = "请选择记账 / 收入币种和目标币种后，系统会自动查询汇率。";
+        render();
+        return;
+      }
+
+      if (baseCurrency === targetCurrency) {
+        rateInput.value = "1.0000";
+        rateStatus.textContent = `记账币种和目标币种相同，不需要换算：1 ${baseCurrency} = 1 ${targetCurrency}`;
+        render();
+        return;
+      }
+
+      rateStatus.textContent = `正在查询这一天的 ${baseCurrency} → ${targetCurrency} 汇率……`;
 
       try {
-        const url = `https://api.frankfurter.dev/v1/${date}?base=USD&symbols=CNY`;
+        const url = `https://api.frankfurter.dev/v1/${date}?base=${baseCurrency}&symbols=${targetCurrency}`;
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -456,24 +1072,24 @@
         }
 
         const data = await response.json();
-        const rate = data.rates && data.rates.CNY;
+        const rate = data.rates && data.rates[targetCurrency];
         const actualDate = data.date || date;
 
         if (!rate) {
-          throw new Error("没有找到 CNY 汇率");
+          throw new Error("没有找到该币种汇率");
         }
 
         rateInput.value = Number(rate).toFixed(4);
 
         if (actualDate !== date) {
-          rateStatus.textContent = `已使用最近可用日期 ${actualDate} 的汇率：1 USD ≈ ${Number(rate).toFixed(4)} CNY`;
+          rateStatus.textContent = `已使用最近可用日期 ${actualDate} 的汇率：1 ${baseCurrency} ≈ ${Number(rate).toFixed(4)} ${targetCurrency}`;
         } else {
-          rateStatus.textContent = `已查询 ${actualDate} 汇率：1 USD ≈ ${Number(rate).toFixed(4)} CNY`;
+          rateStatus.textContent = `已查询 ${actualDate} 汇率：1 ${baseCurrency} ≈ ${Number(rate).toFixed(4)} ${targetCurrency}`;
         }
 
         render();
       } catch (error) {
-        rateStatus.textContent = "自动查询失败。你可以先手动填写汇率，之后再更新。";
+        rateStatus.textContent = `自动查询 ${baseCurrency} → ${targetCurrency} 汇率失败。你可以先手动填写汇率，之后再更新。`;
         console.error(error);
       }
     }
@@ -481,10 +1097,23 @@
     async function addRecord() {
       const date = dateInput.value;
       const income = Number(incomeInput.value || 0);
-      const expense = Number(expenseInput.value || 0);
+      const expenseOriginal = Number(expenseInput.value || 0);
+      const baseCurrency = getBaseCurrency();
+      const targetCurrency = getTargetCurrency();
+      const expenseCurrency = getExpenseCurrency();
 
       if (!date) {
         alert("请先选择日期");
+        return;
+      }
+
+      if (!baseCurrency || !targetCurrency) {
+        alert("请先选择记账 / 收入币种和目标币种");
+        return;
+      }
+
+      if (!expenseCurrency) {
+        alert("请选择支出币种");
         return;
       }
 
@@ -492,15 +1121,41 @@
         await fetchExchangeRateByDate(date);
       }
 
-      const rate = Number(rateInput.value || 6.8);
+      const rate = Number(rateInput.value || 1);
+
+      let expenseToBaseRate = 1;
+      let expense = expenseOriginal;
+
+      try {
+        expenseToBaseRate = await fetchRate(date, expenseCurrency, baseCurrency);
+        expense = expenseOriginal * expenseToBaseRate;
+
+        if (expenseCurrency === baseCurrency) {
+          expenseRateStatus.textContent = `支出币种和记账币种相同：1 ${expenseCurrency} = 1 ${baseCurrency}`;
+        } else {
+          expenseRateStatus.textContent = `支出已按汇率换算：1 ${expenseCurrency} ≈ ${expenseToBaseRate.toFixed(4)} ${baseCurrency}`;
+        }
+      } catch (error) {
+        alert("支出币种汇率查询失败。你可以先把支出手动换算成记账币种后再记录。");
+        console.error(error);
+        return;
+      }
+
       const balance = income - expense;
+
+      const wasComplete = isGoalComplete();
 
       const newRecord = {
         date,
         income,
         expense,
+        expenseOriginal,
+        expenseCurrency,
+        expenseToBaseRate,
         balance,
-        rate
+        rate,
+        baseCurrency,
+        targetCurrency
       };
 
       const existingIndex = records.findIndex(record => record.date === date);
@@ -515,6 +1170,14 @@
       saveRecords();
       render();
 
+      const nowComplete = isGoalComplete();
+
+      if (!wasComplete && nowComplete && !goalSettings.celebrated) {
+        goalSettings.celebrated = true;
+        saveGoal();
+        launchCelebration();
+      }
+
       incomeInput.value = "";
       expenseInput.value = "";
     }
@@ -522,13 +1185,24 @@
     function deleteRecord(date) {
       records = records.filter(record => record.date !== date);
       saveRecords();
+
+      if (!isGoalComplete()) {
+        goalSettings.celebrated = false;
+        saveGoal();
+      }
+
       render();
     }
 
     function clearAll() {
-      if (!confirm("确定要清空全部记账记录吗？")) return;
+      if (!confirm("确定要清空全部记录吗？这个操作不能恢复。")) return;
+
       records = [];
       saveRecords();
+
+      goalSettings.celebrated = false;
+      saveGoal();
+
       render();
     }
 
@@ -538,109 +1212,227 @@
         return;
       }
 
-      const header = ["日期", "收入USD", "支出USD", "当天剩余USD", "当日汇率", "累计剩余USD", "约合人民币CNY"];
+      const baseCurrency = goalSettings.baseCurrency || getBaseCurrency() || "记账币种";
+      const targetCurrency = goalSettings.currency || getTargetCurrency() || "目标币种";
+      const header = [
+        "日期",
+        `收入${baseCurrency}`,
+        `支出原币种`,
+        `支出币种`,
+        `支出折合${baseCurrency}`,
+        `当天剩余${baseCurrency}`,
+        "当日汇率",
+        "目标币种",
+        `累计剩余${baseCurrency}`,
+        `约合${targetCurrency}`
+      ];
+
       const rowsOldToNew = [...records].sort((a, b) => new Date(a.date) - new Date(b.date));
       let runningBalance = 0;
 
       const rows = rowsOldToNew.map(record => {
-        runningBalance += record.balance;
+        runningBalance += Number(record.balance || 0);
+
+        const recordBaseCurrency = record.baseCurrency || baseCurrency;
+        const recordTargetCurrency = record.targetCurrency || targetCurrency;
+        const rate = recordBaseCurrency === recordTargetCurrency ? 1 : Number(record.rate || 1);
+
         return [
           record.date,
           record.income.toFixed(2),
+          Number(record.expenseOriginal ?? record.expense).toFixed(2),
+          record.expenseCurrency || recordBaseCurrency,
           record.expense.toFixed(2),
           record.balance.toFixed(2),
-          Number(record.rate).toFixed(4),
+          rate.toFixed(4),
+          recordTargetCurrency,
           runningBalance.toFixed(2),
-          (runningBalance * Number(record.rate)).toFixed(2)
+          (runningBalance * rate).toFixed(2)
         ];
       });
 
       const lineBreak = String.fromCharCode(10);
       const bom = String.fromCharCode(0xfeff);
-      const csvContent = [header, ...rows]
-        .map(row => row.join(","))
-        .join(lineBreak);
+      const csvContent = [header, ...rows].map(row => row.join(",")).join(lineBreak);
 
-      const blob = new Blob([bom + csvContent], { type: "text/csv;charset=utf-8;" });
+      const blob = new Blob([bom + csvContent], {
+        type: "text/csv;charset=utf-8;"
+      });
+
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
+
       link.href = url;
       link.download = "money_tracker_records.csv";
       link.click();
+
       URL.revokeObjectURL(url);
     }
 
-    function renderGoalMilestones(currentRate) {
-      const targetCNY = 100000;
+    function getTotals() {
+      const baseCurrency = getBaseCurrency();
+      const targetCurrency = getTargetCurrency();
+      const currentRate = baseCurrency && targetCurrency && baseCurrency === targetCurrency ? 1 : Number(rateInput.value || 1);
+
+      const totalIncome = records.reduce((sum, record) => sum + Number(record.income || 0), 0);
+      const totalExpense = records.reduce((sum, record) => sum + Number(record.expense || 0), 0);
+      const totalBalance = records.reduce((sum, record) => sum + Number(record.balance || 0), 0);
+      const totalConverted = totalBalance * currentRate;
+
+      return {
+        baseCurrency,
+        targetCurrency,
+        currentRate,
+        totalIncome,
+        totalExpense,
+        totalBalance,
+        totalConverted
+      };
+    }
+
+    function isGoalComplete() {
+      const targetAmount = Number(goalSettings.amount || 0);
+      const targetCurrency = getTargetCurrency();
+
+      if (!targetAmount || targetAmount <= 0 || !targetCurrency) return false;
+
+      return getTotals().totalConverted >= targetAmount;
+    }
+
+    function formatMilestone(value, currency) {
+      if (!currency) return Number(value || 0).toLocaleString();
+
+      if (currency === "CNY" && value >= 10000) {
+        return (value / 10000).toFixed(value % 10000 === 0 ? 0 : 1) + "万";
+      }
+
+      if (currency === "USD" && value >= 1000) {
+        return "$" + (value / 1000).toFixed(value % 1000 === 0 ? 0 : 1) + "k";
+      }
+
+      return formatMoney(value, currency).replace(".00", "");
+    }
+
+    function renderGoalMilestones(currentRate, targetCurrency, targetAmount) {
       const milestoneLabels = document.getElementById("milestoneLabels");
-      const milestoneDates = document.getElementById("milestoneDates");
+
+      if (!targetAmount || targetAmount <= 0) {
+        milestoneLabels.innerHTML = `
+          <div class="milestone-label" style="left: 0%">0</div>
+          <div class="milestone-label" style="left: 100%">目标</div>
+        `;
+        return;
+      }
 
       const recordsOldToNew = [...records].sort((a, b) => new Date(a.date) - new Date(b.date));
       let runningBalance = 0;
       const reachedDates = {};
 
       recordsOldToNew.forEach(record => {
-        runningBalance += record.balance;
-        const runningCNY = runningBalance * currentRate;
+        runningBalance += Number(record.balance || 0);
 
-        for (let milestone = 10000; milestone <= targetCNY; milestone += 10000) {
-          if (runningCNY >= milestone && !reachedDates[milestone]) {
-            reachedDates[milestone] = record.date.slice(5).replace("-", "/");
+        const recordBaseCurrency = record.baseCurrency || getBaseCurrency();
+        const rateForRecord = recordBaseCurrency === targetCurrency ? 1 : Number(record.rate || currentRate || 1);
+        const runningTargetValue = runningBalance * rateForRecord;
+
+        for (let i = 1; i <= 10; i++) {
+          const milestone = targetAmount * (i / 10);
+
+          if (runningTargetValue >= milestone && !reachedDates[i]) {
+            reachedDates[i] = record.date.slice(5).replace("-", "/");
           }
         }
       });
 
       let labelsHTML = "";
-      let datesHTML = "";
 
       for (let i = 0; i <= 10; i++) {
         const percent = i * 10;
-        const milestoneValue = i * 10000;
+        const milestoneValue = targetAmount * (i / 10);
+        const dateHTML = i > 0 && reachedDates[i] ? `<span class="milestone-date">${reachedDates[i]}</span>` : "";
+
         labelsHTML += `
           <div class="milestone-label" style="left: ${percent}%">
-            <div class="milestone-tick"></div>
-            ${formatWanLabel(i)}
+            ${i === 0 ? "0" : formatMilestone(milestoneValue, targetCurrency)}
+            ${dateHTML}
           </div>
         `;
-
-        if (i > 0 && reachedDates[milestoneValue]) {
-          datesHTML += `
-            <div class="milestone-date" style="left: ${percent}%">
-              ${reachedDates[milestoneValue]}
-            </div>
-          `;
-        }
       }
 
       milestoneLabels.innerHTML = labelsHTML;
-      milestoneDates.innerHTML = datesHTML;
     }
 
     function render() {
-      const totalIncome = records.reduce((sum, record) => sum + record.income, 0);
-      const totalExpense = records.reduce((sum, record) => sum + record.expense, 0);
-      const totalBalance = records.reduce((sum, record) => sum + record.balance, 0);
-      const currentRate = Number(rateInput.value || 6.8);
-      const totalCNY = totalBalance * currentRate;
-      const targetCNY = 100000;
-      const targetProgress = Math.min((totalCNY / targetCNY) * 100, 100);
-      const targetLeft = Math.max(targetCNY - totalCNY, 0);
+      const targetAmount = Number(goalSettings.amount || 0);
+      const totals = getTotals();
+      const baseCurrency = totals.baseCurrency;
+      const targetCurrency = totals.targetCurrency;
+      const currentRate = totals.currentRate;
+      const totalIncome = totals.totalIncome;
+      const totalExpense = totals.totalExpense;
+      const totalBalance = totals.totalBalance;
+      const totalConverted = totals.totalConverted;
 
-      document.getElementById("targetProgress").textContent = targetProgress.toFixed(1) + "%";
-      document.getElementById("targetLeft").textContent = "还差 " + formatCNY(targetLeft);
-      document.getElementById("goalSubtitle").textContent = "已完成 " + formatCNY(totalCNY) + " / ¥100,000.00";
+      const hasGoal = targetAmount > 0 && !!targetCurrency;
+      const rawProgress = hasGoal ? (totalConverted / targetAmount) * 100 : 0;
+      const targetProgress = Math.min(rawProgress, 100);
+      const targetLeft = hasGoal ? Math.max(targetAmount - totalConverted, 0) : 0;
+      const overTarget = hasGoal ? Math.max(totalConverted - targetAmount, 0) : 0;
+
+      updateCurrencyLabels();
+
+      document.getElementById("totalIncome").textContent = formatBase(totalIncome);
+      document.getElementById("totalExpense").textContent = formatBase(totalExpense);
+      document.getElementById("totalBalance").textContent = formatBase(totalBalance);
+      document.getElementById("convertedLabel").textContent = `累计剩余约合${targetCurrency || "目标币种"}`;
+      document.getElementById("totalConverted").textContent = formatMoney(totalConverted, targetCurrency);
+
+      document.getElementById("goalTitle").textContent = "目标进度";
+
+      const completeMessage = document.getElementById("completeMessage");
+
+      if (hasGoal) {
+        document.getElementById("goalSubtitle").textContent =
+          formatMoney(totalConverted, targetCurrency) + " / " + formatMoney(targetAmount, targetCurrency);
+        document.getElementById("targetProgress").textContent =
+          "完成 " + rawProgress.toFixed(1) + "%";
+
+        if (overTarget > 0) {
+          document.getElementById("targetLeft").textContent =
+            "已超出目标 " + formatMoney(overTarget, targetCurrency);
+          completeMessage.style.display = "block";
+        } else {
+          document.getElementById("targetLeft").textContent =
+            "还差 " + formatMoney(targetLeft, targetCurrency);
+          completeMessage.style.display = "none";
+        }
+
+        document.getElementById("goalTargetLine").textContent =
+          "目标：" + formatMoney(targetAmount, targetCurrency);
+      } else {
+        document.getElementById("goalSubtitle").textContent = "请先设置目标金额和币种";
+        document.getElementById("targetProgress").textContent = "完成 0.0%";
+        document.getElementById("targetLeft").textContent = "设置目标后自动计算还差多少";
+        document.getElementById("goalTargetLine").textContent = "目标：未设置";
+        completeMessage.style.display = "none";
+      }
+
       document.getElementById("progressFill").style.width = targetProgress + "%";
+      document.getElementById("progressBadge").textContent = targetProgress.toFixed(1) + "%";
       document.getElementById("moneyPlane").style.left = targetProgress + "%";
-      renderGoalMilestones(currentRate);
-      document.getElementById("totalIncome").textContent = formatUSD(totalIncome);
-      document.getElementById("totalExpense").textContent = formatUSD(totalExpense);
-      document.getElementById("totalBalance").textContent = formatUSD(totalBalance);
-      document.getElementById("totalCNY").textContent = formatCNY(totalCNY);
+
+      renderGoalMilestones(currentRate, targetCurrency, hasGoal ? targetAmount : 0);
 
       const tableWrap = document.getElementById("tableWrap");
 
       if (records.length === 0) {
-        tableWrap.innerHTML = '<div class="empty">还没有记录。落地之后第一天就可以开始记啦。</div>';
+        tableWrap.innerHTML = `
+          <div class="empty">
+            <span class="empty-icon">▣</span>
+            暂无记录<br />
+            开始记录你的第一笔收入和支出吧！
+          </div>
+        `;
         return;
       }
 
@@ -648,50 +1440,111 @@
       let runningBalance = 0;
 
       const recordsWithTotal = recordsOldToNew.map(record => {
-        runningBalance += record.balance;
-        return {
-          ...record,
-          runningBalance
-        };
+        runningBalance += Number(record.balance || 0);
+        return { ...record, runningBalance };
       }).sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      const baseLabel = getBaseCurrency() || "记账币种";
+      const targetLabel = targetCurrency || "目标币种";
 
       tableWrap.innerHTML = `
         <table>
           <thead>
             <tr>
               <th>日期</th>
-              <th>收入 $</th>
-              <th>支出 $</th>
-              <th>当天剩余 $</th>
-              <th>当日汇率</th>
-              <th>累计剩余 $</th>
-              <th>约合人民币</th>
+              <th>收入 (${baseLabel})</th>
+              <th>支出</th>
+              <th>支出折合 (${baseLabel})</th>
+              <th>当天剩余 (${baseLabel})</th>
+              <th>累计剩余 (${baseLabel})</th>
+              <th>约合${targetLabel}</th>
               <th>操作</th>
             </tr>
           </thead>
           <tbody>
-            ${recordsWithTotal.map(record => `
-              <tr>
-                <td>${record.date}</td>
-                <td>${formatUSD(record.income)}</td>
-                <td>${formatUSD(record.expense)}</td>
-                <td class="${record.balance >= 0 ? "positive" : "negative"}">${formatUSD(record.balance)}</td>
-                <td>${Number(record.rate).toFixed(4)}</td>
-                <td class="${record.runningBalance >= 0 ? "positive" : "negative"}">${formatUSD(record.runningBalance)}</td>
-                <td>${formatCNY(record.runningBalance * Number(record.rate))}</td>
-                <td><button class="danger" onclick="deleteRecord('${record.date}')">删除</button></td>
-              </tr>
-            `).join("")}
+            ${recordsWithTotal.map(record => {
+              const recordBaseCurrency = record.baseCurrency || baseCurrency;
+              const rate = recordBaseCurrency === targetCurrency ? 1 : Number(record.rate || currentRate || 1);
+
+              return `
+                <tr>
+                  <td>${record.date}</td>
+                  <td>${formatMoney(record.income, recordBaseCurrency)}</td>
+                  <td>${formatMoney(record.expenseOriginal ?? record.expense, record.expenseCurrency || recordBaseCurrency)}</td>
+                  <td>${formatMoney(record.expense, recordBaseCurrency)}</td>
+                  <td class="${record.balance >= 0 ? "positive" : "negative"}">${formatMoney(record.balance, recordBaseCurrency)}</td>
+                  <td class="${record.runningBalance >= 0 ? "positive" : "negative"}">${formatMoney(record.runningBalance, recordBaseCurrency)}</td>
+                  <td>${formatMoney(record.runningBalance * rate, targetCurrency)}</td>
+                  <td><button class="btn-danger" onclick="deleteRecord('${record.date}')">删除</button></td>
+                </tr>
+              `;
+            }).join("")}
           </tbody>
         </table>
       `;
     }
 
+    function launchCelebration() {
+      celebrationLayer.innerHTML = "";
+      celebrationLayer.style.display = "block";
+
+      const main = document.createElement("div");
+      main.className = "celebration-main";
+      main.textContent = "🎉";
+      celebrationLayer.appendChild(main);
+
+      const pieces = [
+        [-180, -130, -35], [-120, -210, 28], [-60, -155, -18], [0, -230, 12],
+        [70, -170, 35], [130, -220, -20], [190, -120, 26], [-210, -20, 18],
+        [210, 20, -28], [-160, 120, 42], [-70, 175, -36], [45, 165, 22],
+        [150, 115, -16], [0, 210, 30]
+      ];
+
+      setTimeout(() => {
+        pieces.forEach(([x, y, r], index) => {
+          const piece = document.createElement("div");
+          piece.className = "celebration-piece";
+          piece.textContent = "🎉";
+          piece.style.setProperty("--x", x + "px");
+          piece.style.setProperty("--y", y + "px");
+          piece.style.setProperty("--r", r + "deg");
+          piece.style.animationDelay = (index * 18) + "ms";
+          celebrationLayer.appendChild(piece);
+        });
+      }, 430);
+
+      setTimeout(() => {
+        celebrationLayer.style.display = "none";
+        celebrationLayer.innerHTML = "";
+      }, 1900);
+    }
+
+    baseCurrencySelect.addEventListener("change", () => {
+      updateCurrencyLabels();
+      fetchExchangeRateByDate(dateInput.value);
+      render();
+    });
+
+    expenseCurrencySelect.addEventListener("change", () => {
+      expenseRateStatus.textContent = "支出币种已更新，添加记录时会自动换算为记账币种。";
+    });
+
+    goalCurrencySelect.addEventListener("change", () => {
+      customCurrencyWrap.style.display = goalCurrencySelect.value === "CUSTOM" ? "block" : "none";
+      updateCurrencyLabels();
+      fetchExchangeRateByDate(dateInput.value);
+      render();
+    });
+
+    customCurrencyInput.addEventListener("input", () => {
+      customCurrencyInput.value = customCurrencyInput.value.toUpperCase();
+      updateCurrencyLabels();
+    });
+
     dateInput.addEventListener("change", () => fetchExchangeRateByDate(dateInput.value));
     rateInput.addEventListener("input", render);
 
-    fetchExchangeRateByDate(dateInput.value);
-    render();
+    loadCurrencies();
   </script>
 </body>
 </html>
